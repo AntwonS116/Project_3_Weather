@@ -110,29 +110,57 @@ function optionChanged(selectedCity){
   };
     layout_bar = {
         title: '5 Day Max Temperature Forecast', 
-        xaxis: {title: 'Date'}, 
-        yaxis: {title: 'Temperature'},
+        xaxis: {title: 'Date', tickangle: -38, tickvals: xdate, ticktext: xdate}, 
+        yaxis: {title: 'Temperature (Celsius)'},
         
     };
     Plotly.newPlot("bar", [trace], layout_bar);
+
+
+    //bubble chart for wind speed 
+
+    const bubbleDisplay = d3.select("#bubble");
+    bubbleDisplay.html("");
+
+    const idCloud = data.metadata5.filter(city => (city.City == selectedCity));
+    // console.log(idWind[0]["Wind Speed"]);
+
+    ycloud = [];
+    xdate1 = [];
+    for ( var i = 0; i < idCloud.length; i++){
+      var cloudiness = idCloud[i]["Cloudiness"];
+      ycloud.push(cloudiness);
+      // console.log(ycloud);
+      var dateCloud = idCloud[i]["Date"];
+      xdate1.push(dateCloud);
+      // console.log(xdate1);
+    }
+
+    let trace1 = {
+      y: ycloud,
+      x: xdate1,
+      type: 'bubble',
+      mode: 'markers',
+      marker: {
+        size: ycloud,
+        color: xdate1,
+        
+      },
+    };
+    layout1 = {
+      title: '<b>5 Day Cloud Cover</b>',
+      xaxis: {title: 'Date', tickangle: -38, tickvals: xdate1, ticktext: xdate1},
+      yaxis: {title: 'Cloudiness (%)', range: [0, 120]},
+      showlegend: false,
+      height: 600,
+      width: 1000,
+    };
+    Plotly.newPlot("bubble", [trace1], layout1);
+
+
 });
 
-
-  
-  
-  // const yValues = maxTemp.map(item => item.City + " " + "Degrees")
-  //   const trace = {
-  //         y: yValues, 
-  //         x: dateFor, 
-  //         type: 'bar', 
-  //     };
-  //         layout = {
-  //             title: '5 Day Max Temperature Forecast', 
-  //             xaxis: {title: 'Date'}, 
-  //             yaxis: {title: 'Temperature'}
-  //         };
-  // Plotly.newPlot("bar", trace, layout_bar);
-  // });
+    
 }
 
 
@@ -140,16 +168,7 @@ function optionChanged(selectedCity){
   optionChanged("New York City");
 
 
-//   //event on change takes the value and calls the function during drop down selection 
 
-// d3.select("#selDataset").on("change",() => {
-// optionChanged(d3.event.target.value);
-
-// });
-//   });
-// }
-
-// // optionChanged();
 
 
   

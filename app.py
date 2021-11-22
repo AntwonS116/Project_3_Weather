@@ -16,7 +16,7 @@ def home():
 @app.route("/script")
 def script():
     api_call()
-    easygui.msgbox("Database Updated Successfully\nCheck Your Mongo To See Our Raw Data", "Success")
+    easygui.msgbox("Database Updated Successfully!", "Success")
     return redirect("/")
 
 @app.route("/heatmap")

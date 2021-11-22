@@ -7,7 +7,7 @@ import pymongo
 
 def api_call():
     #connect to mongo db
-    client = pymongo.MongoClient("mongodb://localhost:27017")
+    client = pymongo.MongoClient("mongodb+srv://AntwonS116:antwon123@city-weather-db.8qotx.mongodb.net/test")
 
     #getting city list of top 200 cities
 
@@ -54,9 +54,9 @@ def api_call():
 
     #update mongo db with new data
 
-    weather_data = weather_df.to_dict(orient='records')
-    db = client["city_weather_db"]
-    db.weather.insert_many(weather_data)
+    weatherData = weather_df.to_dict(orient='records')
+    db = client["city-weather-db"]
+    db.weather.insert_many(weatherData)
 
     #second api call for 5 day forecast
 
@@ -94,6 +94,6 @@ def api_call():
 
     #update mongo db with new data
     data5 = weather5_df.to_dict(orient='records')
-    db = client["city_weather_db"]
-    db.weather_5.insert_many(data5)
+    db = client["city-weather-db"]
+    db.weather5.insert_many(data5)
 

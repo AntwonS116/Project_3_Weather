@@ -5,7 +5,7 @@ from werkzeug.utils import append_slash_redirect, redirect
 from script import api_call
 # import easygui
 
-app = Flask(__name__)
+app = Flask(__name__, templates_folder='templates')
 
 
 @app.route('/')

@@ -7,7 +7,6 @@ import easygui
 
 app = Flask(__name__)
 
-# mongo = PyMongo(app, uri="mongodb://localhost:27017/city_weather_db")
 
 @app.route('/')
 def home():
